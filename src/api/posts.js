@@ -1,4 +1,4 @@
-import { client } from '@/utils/http';
+import { client } from "@/utils/http";
 
 const USER_ID = 2293;
 
@@ -14,14 +14,14 @@ export const getAllPosts = async () => {
   return response.data;
 };
 
-export const getPost = async ({id}) => {
+export const getPost = async (id) => {
   const response = await client.get(`/posts/${id}`);
 
   return response.data;
 };
 
-export const createPost = async ({title, body}) => {
-  const response = await client.post('/posts', {
+export const createPost = async ({ title, body }) => {
+  const response = await client.post("/posts", {
     userId: USER_ID,
     title,
     body,
@@ -40,8 +40,31 @@ export const updatePost = async ({ id, title, body }) => {
   return response.data;
 };
 
-export const deletePost = async id => {
+export const deletePost = async (id) => {
   const response = await client.delete(`/posts/${id}`);
+
+  return response.data;
+};
+
+export const getComments = async (postId) => {
+  const response = await client.get(`/comments?postId=${postId}`);
+
+  return response.data;
+};
+
+export const deleteComment = async (id) => {
+  const response = await client.delete(`/comments/${id}`);
+
+  return response.data;
+};
+
+export const createComment = async ({ postId, name, email, body }) => {
+  const response = await client.post("/comments", {
+    postId,
+    name,
+    email,
+    body,
+  });
 
   return response.data;
 };
