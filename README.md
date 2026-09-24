@@ -1,4 +1,4 @@
-(DEMO)[https://pdabizha.github.io/vue_dynamic-list-of-posts/]
+[DEMO](https://pdabizha.github.io/vue_dynamic-list-of-posts/)
 
 # Vue Dynamic List of Posts
 
