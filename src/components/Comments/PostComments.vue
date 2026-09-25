@@ -31,25 +31,25 @@ onMounted(async () => {
 
 const handleCommentCreated = (comment) => {
   comments.value.push(comment);
-  isFormOpen.value = false;
+  // isFormOpen.value = false;
 };
 
 const handleDeleteComment = async (comment) => {
-  if (deletingIds.value.includes(comment.id)) {
+  const index = comments.value.findIndex((item) => item.id === comment.id);
+
+  if (index === -1) {
     return;
   }
 
-  deletingIds.value.push(comment.id);
   deleteError.value = "";
+  comments.value.splice(index, 1); // удаляем сразу
 
   try {
     await deleteComment(comment.id);
-    comments.value = comments.value.filter((item) => item.id !== comment.id);
   } catch (error) {
     console.error("[Comments] failed to delete:", error);
-    deleteError.value = "Failed to delete the comment.";
-  } finally {
-    deletingIds.value = deletingIds.value.filter((id) => id !== comment.id);
+    comments.value.splice(index, 0, comment); // откат при ошибке
+    deleteError.value = "Unable to delete the comment. Please try again.";
   }
 };
 </script>

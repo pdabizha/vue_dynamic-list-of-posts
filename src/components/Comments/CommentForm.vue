@@ -72,6 +72,7 @@ const handleSubmit = async () => {
   }
 
   isSubmitting.value = false;
+  body.value = "";
   emit("created", comment);
 };
 </script>

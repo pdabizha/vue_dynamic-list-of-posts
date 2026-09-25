@@ -12,6 +12,8 @@ const user = ref(null);
 const posts = ref([]);
 const isLoading = ref(true);
 
+const postsError = ref("");
+
 // right column
 const isSidebarOpen = ref(false);
 const sidebarMode = ref("form"); // 'form' | 'post'
@@ -35,6 +37,7 @@ onMounted(async () => {
     posts.value = await getAllPosts();
   } catch (error) {
     console.error("[App] failed to load posts:", error);
+    postsError.value = "Something went wrong!";
   } finally {
     isLoading.value = false;
   }
@@ -156,6 +159,7 @@ const handleCancel = () => {
         <PostsTable
           class="Layout__main"
           :posts="posts"
+          :error="postsError"
           :is-loading="isLoading"
           :selected-post-id="selectedPostId"
           @add-post="handleAddPost"

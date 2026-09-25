@@ -28,6 +28,8 @@ const emit = defineEmits(["edit", "delete"]);
 
         <span
           class="icon is-small is-right has-text-danger is-clickable ml-3"
+          :class="{ 'is-disabled': isDeleting }"
+          :style="isDeleting ? 'pointer-events: none; opacity: 0.4' : ''"
           @click="emit('delete', post)"
         >
           <i class="fas fa-trash"></i>
