@@ -72,7 +72,17 @@ const handleSubmit = async () => {
   }
 
   isSubmitting.value = false;
+  body.value = "";
   emit("created", comment);
+};
+
+const handleClear = () => {
+  name.value = "";
+  email.value = "";
+  body.value = "";
+  errors.name = "";
+  errors.email = "";
+  errors.body = "";
 };
 </script>
 
@@ -129,6 +139,16 @@ const handleSubmit = async () => {
           @click="emit('cancel')"
         >
           Cancel
+        </button>
+      </div>
+      <div class="control">
+        <button
+          type="button"
+          class="button is-link is-light"
+          :disabled="isSubmitting"
+          @click="handleClear"
+        >
+          Clear
         </button>
       </div>
     </div>

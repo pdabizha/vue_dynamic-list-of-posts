@@ -5,6 +5,7 @@ defineProps({
   posts: { type: Array, default: () => [] },
   isLoading: { type: Boolean, default: false },
   selectedPostId: { type: [Number, String], default: null },
+  error: { type: String, default: "" },
 });
 
 const emit = defineEmits(["add-post", "open-post"]);
@@ -27,6 +28,13 @@ const emit = defineEmits(["add-post", "open-post"]);
         </div>
 
         <Loader v-if="isLoading" />
+        <div
+          v-else-if="error"
+          class="notification is-danger"
+          data-cy="PostsLoadingError"
+        >
+          {{ error }}
+        </div>
 
         <p v-else-if="posts.length === 0" class="has-text-centered">
           No posts yet.
