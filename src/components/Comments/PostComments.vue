@@ -31,7 +31,6 @@ onMounted(async () => {
 
 const handleCommentCreated = (comment) => {
   comments.value.push(comment);
-  // isFormOpen.value = false;
 };
 
 const handleDeleteComment = async (comment) => {
